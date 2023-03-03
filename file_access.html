@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Defect Detection</title>
+        <script type='text/javascript' src='/eel.js'></script>
+        <script type='text/javascript'>
+
+
+        async function model() {
+            let model_file = document.getElementById('model');
+            let input_loc = await eel.input()();
+            model_file.value = input_loc;
+        }
+
+
+        async function output() {
+            let output_file = document.getElementById('output_img');
+            let output_loc = await eel.output()();
+            output_file.value = output_loc;
+        }
+
+        async function input() {
+            let input_file = document.getElementById('img_selected');
+            let input_loc = await eel.input()();
+            input_file.value = input_loc;
+        }
+
+        
+        async function Browse() {
+            let output_file = document.getElementById('output_img');
+            let input_file = document.getElementById('img_selected');
+            let model = document.getElementById('model');
+            let output_value = output_file.value
+            let input_value = input_file.value
+            let model_value = model.value
+            locations = [input_value, output_value, model_value]
+            let filename = await eel.Browse(locations)();
+        }
+        
+        </script>
+    </head>
+    
+    <body>
+      <h1 id="header">Defect Detection</h1>
+
+      </br>
+
+      <label for="model">Choose Model Location:</label>
+      <input type="text" id="model" name="model"/>
+      <button type="button" onclick="model('model')">Browse</button>
+      </br>
+
+      <label for="output_img">Choose Output Image Location:</label>
+      <input type="text" id="output_img" name="output_img"></input>
+      <button type="button" onclick="output('output_img')">Browse</button>
+      </br>
+
+
+      <label for="img_selected">Choose an Input Image:</label>
+      <input type="text" id="img_selected" name="img_selected"></input>
+      <button type="button" onclick="input('img_selected')">Browse</button>
+      </br>
+
+      <button type="button" onclick="Browse('img_selected')">Start</button>
+    </body>
+</html>
